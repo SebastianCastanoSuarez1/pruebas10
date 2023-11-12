@@ -9,16 +9,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Empleado")
-@NamedQuery(name = "Empleado.findAll", query = "SELECT e FROM Empleado e")
+@Table(name = "Proyecto")
+@NamedQuery(name = "Proyecto.findAll", query = "SELECT d FROM Proyecto d")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Empleado {
+public class Proyecto {
 	private Integer id;
 	private String nombre;
-	private double salario;
-	private Departamento departamento;
-
 }
