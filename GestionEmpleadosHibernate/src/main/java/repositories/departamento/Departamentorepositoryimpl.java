@@ -69,7 +69,7 @@ public class Departamentorepositoryimpl implements Departamentorepository {
 			hb.close();
 			return true;
 		} catch (Exception e) {
-			System.out.println("Erorr al eliminar el departamento");
+			System.out.println("Error al eliminar el departamento");
 		}finally {
 			if (hb.getTransaction().isActive()) {
 				hb.getTransaction().rollback();
