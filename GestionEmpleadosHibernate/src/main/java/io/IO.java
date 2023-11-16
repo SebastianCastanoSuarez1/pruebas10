@@ -1,5 +1,6 @@
 package io;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
@@ -9,30 +10,27 @@ import java.util.Scanner;
  * </p>
  * 
  * <p>
- * <b>USO EDUCATIVO</b>
- * </p>
- * 
- * <p>
  * Los tipos de dato que maneja son:
  * </p>
  * 
  * <ul>
- * <li>entero (int)
- * <li>decimal (double)
- * <li>caracter (char)
- * <li>byte
- * <li>short
- * <li>int
- * <li>long
- * <li>float
- * <li>double
- * <li>boolean (true, false)
- * <li>char
+ * <li>Integer
+ * <li>IntegerOrNull
+ * <li>Double
+ * <li>DoubleOrNull
+ * <li>Character
+ * <li>Byte
+ * <li>Short
+ * <li>Long
+ * 
+ * <li>Float
+ * <li>Boolean (true, false)
  * <li>String (admite tira vacía)
+ * <li>LocalDateOrNull (null si la fecha está vacía)
  * </ul>
  * 
  * @author Amadeo
- * @version 1.0
+ * @version 1.1
  * @since 2018-07-01
  */
 public class IO {
@@ -49,21 +47,28 @@ public class IO {
 	/**
 	 * Muestra un objeto
 	 * 
-	 * @param o
-	 *            objeto
+	 * @param objeto
 	 */
 	static public void print(Object o) {
 		System.out.print(o);
 	}
 
 	/**
-	 * Muestra un objeto y salta de l�nea
+	 * Muestra un objeto y salta de línea
 	 * 
-	 * @param o
-	 *            objeto
+	 * @param objeto
 	 */
 	static public void println(Object o) {
 		System.out.println(o);
+	}
+
+	/**
+	 * Muestra objetos según un formato
+	 * 
+	 * @param objeto
+	 */
+	static public void printf(String format, Object... objects) {
+		System.out.printf(format, objects);
 	}
 
 	/**
@@ -71,7 +76,7 @@ public class IO {
 	 * 
 	 * @return
 	 */
-	static public byte readByte() {
+	static public Byte readByte() {
 		while (true) {
 			try {
 				return Byte.parseByte(sc.nextLine());
@@ -86,7 +91,7 @@ public class IO {
 	 * 
 	 * @return
 	 */
-	static public short readShort() {
+	static public Short readShort() {
 		while (true) {
 			try {
 				return Short.parseShort(sc.nextLine());
@@ -101,10 +106,29 @@ public class IO {
 	 * 
 	 * @return
 	 */
-	static public int readInt() {
+	static public Integer readInt() {
 		while (true) {
 			try {
 				return Integer.parseInt(sc.nextLine());
+			} catch (Exception e) {
+				System.err.print("ERROR: No es de tipo int ? ");
+			}
+		}
+	}
+
+	/**
+	 * Lee un valor de tipo int
+	 * 
+	 * @return
+	 */
+	static public Integer readIntOrNull() {
+		while (true) {
+			try {
+				String in = sc.nextLine();
+				if (in.isBlank()) {
+					return null;
+				}
+				return Integer.parseInt(in);
 			} catch (Exception e) {
 				System.err.print("ERROR: No es de tipo int ? ");
 			}
@@ -116,7 +140,7 @@ public class IO {
 	 * 
 	 * @return
 	 */
-	static public long readLong() {
+	static public Long readLong() {
 		while (true) {
 			try {
 				return Long.parseLong(sc.nextLine());
@@ -131,7 +155,7 @@ public class IO {
 	 * 
 	 * @return
 	 */
-	static public float readFloat() {
+	static public Float readFloat() {
 		while (true) {
 			try {
 				return Float.parseFloat(sc.nextLine());
@@ -146,7 +170,7 @@ public class IO {
 	 * 
 	 * @return
 	 */
-	static public double readDouble() {
+	static public Double readDouble() {
 		while (true) {
 			try {
 				return Double.parseDouble(sc.nextLine());
@@ -157,20 +181,55 @@ public class IO {
 	}
 
 	/**
+	 * Lee un valor de tipo double
+	 * 
+	 * @return
+	 */
+	static public Double readDoubleOrNull() {
+		while (true) {
+			try {
+				String in = sc.nextLine();
+				if (in.isBlank()) {
+					return null;
+				}
+				return Double.parseDouble(in);
+			} catch (Exception e) {
+				System.err.print("ERROR: No es de tipo double ? ");
+			}
+		}
+	}
+
+	/**
+	 * Lee un valor de tipo LocalDate
+	 * 
+	 * @return
+	 */
+	static public LocalDate readLocalDateOrNull() {
+		while (true) {
+			try {
+				String in = sc.nextLine();
+				if (in.isBlank()) {
+					return null;
+				}
+				String s[] = in.split("-");
+				return LocalDate.of(Integer.parseInt(s[0]),Integer.parseInt(s[1]),Integer.parseInt(s[2]));
+			} catch (Exception e) {
+				System.err.print("ERROR: No es de tipo fecha (aaaa-mm-dd) ? ");
+			}
+		}
+	}
+
+	/**
 	 * Lee un valor de tipo boolean
 	 * 
 	 * @return
 	 */
-	static public boolean readBoolean() {
+	static public Boolean readBoolean() {
 		while (true) {
-			switch (sc.nextLine()) {
-			case "true":
-				return true;
-			case "false":
-				return false;
-			default:
-				System.err.print("ERROR: No es de tipo boolean (true o false) ? ");
-			}
+			String s = sc.nextLine().toLowerCase();
+			if (s.equals("true")) return true;
+			if (s.equals("false")) return false;
+			System.err.print("ERROR: No es de tipo boolean (true o false) ? ");
 		}
 	}
 
@@ -179,7 +238,7 @@ public class IO {
 	 * 
 	 * @return
 	 */
-	static public char readChar() {
+	static public Character readChar() {
 		while (true) {
 			String s = sc.nextLine();
 			if (s.length() == 1) {
@@ -198,14 +257,35 @@ public class IO {
 		return sc.nextLine();
 	}
 
-	/*
-	 * Métodos para idioma español
-	 *
-	 * static public void escribir(Object o) { println(o); }
-	 * static public void mostrar(Object o) { println(o); }
-	 * static public int leerEntero() { return readInt(); }
-	 * static public double leerDecimal() { return readDouble(); }
-	 * static public char leerCaracter() { return readChar(); }
+	/**
+	 * Lee un valor de tipo String
+	 * 
+	 * @return
 	 */
+	static public String readStringMandatory() {
+		while (true) {
+			String s = sc.nextLine();
+			if (!s.isBlank()) {
+				return s;
+			}
+			System.err.print("ERROR: Esta vacío ? ");
+		}
+	}
+	public static Double readSalario(){
+		while (true) {
+			try {
+				double salario;
+				salario=Double.parseDouble(sc.nextLine());
+				if (salario>=0) {
+					return salario;
+				} else {
+					throw new Exception("El salario debe ser mayor a 0");
+				}
+			} catch (Exception e) {
+				System.err.print("ERROR: No es de tipo double ? ");
+			}
+		}
+	}
 
 }
+

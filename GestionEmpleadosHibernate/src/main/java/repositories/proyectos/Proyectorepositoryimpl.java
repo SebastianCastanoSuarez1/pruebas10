@@ -9,7 +9,6 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import models.Proyecto;
-import repositories.empleado.Empleadorepositoryimpl;
 
 public class Proyectorepositoryimpl implements Proyectorepository {
 	private final Logger logger = Logger.getLogger(Proyectorepositoryimpl.class.getName());
@@ -21,9 +20,9 @@ public class Proyectorepositoryimpl implements Proyectorepository {
 		HibernateManager hb = HibernateManager.getInstance();
 		hb.open();
 		TypedQuery<Proyecto> query = hb.getManager().createNamedQuery("Departamento.findAll", Proyecto.class);
-		List<Proyecto> listemp = query.getResultList();
+		List<Proyecto> listPro = query.getResultList();
 		hb.close();
-		return listemp;
+		return listPro;
 	}
 
 	@Override
