@@ -6,10 +6,10 @@ import controller.ProyectoController;
 import io.IO;
 import lombok.var;
 import models.Proyecto;
-import repositories.proyectos.Proyectorepositoryimpl;
+import repositories.proyectos.ProyectoRepositoryImpl;
 
 public class ProyectoView {
-	ProyectoController proyectoController = new ProyectoController(new Proyectorepositoryimpl());
+	ProyectoController proyectoController = new ProyectoController(new ProyectoRepositoryImpl());
 
 	public void add() {
 		String nombre;

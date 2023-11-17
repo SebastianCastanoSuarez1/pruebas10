@@ -5,13 +5,13 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import models.Departamento;
-import repositories.departamento.Departamentorepository;
+import repositories.departamento.DepartamentoRepository;
 
 public class DepartamentoController {
 	private final Logger logger = Logger.getLogger(DepartamentoController.class.getName());
-	private final Departamentorepository departamentorepository;
+	private final DepartamentoRepository departamentorepository;
 
-	public DepartamentoController(Departamentorepository departamentorepository) {
+	public DepartamentoController(DepartamentoRepository departamentorepository) {
 		this.departamentorepository = departamentorepository;
 	}
 

@@ -5,15 +5,15 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import models.Proyecto;
-import repositories.proyectos.Proyectorepository;
+import repositories.proyectos.ProyectoRepository;
 
 public class ProyectoController {
 
 	private final Logger logger = Logger.getLogger(ProyectoController.class.getName());
 
-	private final Proyectorepository proyectorepository;
+	private final ProyectoRepository proyectorepository;
 
-	public ProyectoController(Proyectorepository proyectorepository) {
+	public ProyectoController(ProyectoRepository proyectorepository) {
 		this.proyectorepository = proyectorepository;
 	}
 

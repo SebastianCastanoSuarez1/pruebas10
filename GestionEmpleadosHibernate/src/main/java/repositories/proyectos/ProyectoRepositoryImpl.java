@@ -1,4 +1,4 @@
-package repositories.empleado;
+package repositories.proyectos;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,35 +8,35 @@ import db.HibernateManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
-import models.Empleado;
+import models.Proyecto;
 
-public class Empleadorepositoryimpl implements Empleadorepository {
-	private final Logger logger = Logger.getLogger(Empleadorepositoryimpl.class.getName());
+public class ProyectoRepositoryImpl implements ProyectoRepository {
+	private final Logger logger = Logger.getLogger(ProyectoRepositoryImpl.class.getName());
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("Departamento");
 
 	@Override
-	public List<Empleado> findAll() {
+	public List<Proyecto> findAll() {
 		logger.info("finadAll()");
 		HibernateManager hb = HibernateManager.getInstance();
 		hb.open();
-		TypedQuery<Empleado> query = hb.getManager().createNamedQuery("Departamento.findAll", Empleado.class);
-		List<Empleado> listemp = query.getResultList();
+		TypedQuery<Proyecto> query = hb.getManager().createNamedQuery("Departamento.findAll", Proyecto.class);
+		List<Proyecto> listPro = query.getResultList();
 		hb.close();
-		return listemp;
+		return listPro;
 	}
 
 	@Override
-	public Optional<Empleado> findById(Integer id) {
+	public Optional<Proyecto> findById(Integer id) {
 		logger.info("findById()");
 		HibernateManager hb = HibernateManager.getInstance();
 		hb.open();
-		Optional<Empleado> dep = Optional.ofNullable(hb.getManager().find(Empleado.class, id));// TODO
+		Optional<Proyecto> dep = Optional.ofNullable(hb.getManager().find(Proyecto.class, id));// TODO
 		hb.close();
 		return dep;
 	}
 
 	@Override
-	public Empleado save(Empleado entity) {
+	public Proyecto save(Proyecto entity) {
 		logger.info("save()");
 		HibernateManager hb = HibernateManager.getInstance();
 		hb.open();
@@ -57,13 +57,13 @@ public class Empleadorepositoryimpl implements Empleadorepository {
 	}
 
 	@Override
-	public Boolean delete(Empleado entity) {
+	public Boolean delete(Proyecto entity) {
 		logger.info("delete()");
 		HibernateManager hb=HibernateManager.getInstance();
 		hb.open();
 		try {
 			hb.getTransaction().begin();
-			entity=hb.getManager().find(Empleado.class, entity.getId());
+			entity=hb.getManager().find(Proyecto.class, entity.getId());
 			hb.getManager().remove(entity);
 			hb.getTransaction().commit();
 			hb.close();

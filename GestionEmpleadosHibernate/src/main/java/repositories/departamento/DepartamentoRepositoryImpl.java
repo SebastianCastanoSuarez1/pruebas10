@@ -1,4 +1,4 @@
-package repositories.proyectos;
+package repositories.departamento;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,35 +8,35 @@ import db.HibernateManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
-import models.Proyecto;
+import models.Departamento;
 
-public class Proyectorepositoryimpl implements Proyectorepository {
-	private final Logger logger = Logger.getLogger(Proyectorepositoryimpl.class.getName());
+public class DepartamentoRepositoryImpl implements DepartamentoRepository {
+	private final Logger logger = Logger.getLogger(DepartamentoRepositoryImpl.class.getName());
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("Departamento");
 
 	@Override
-	public List<Proyecto> findAll() {
+	public List<Departamento> findAll() {
 		logger.info("finadAll()");
 		HibernateManager hb = HibernateManager.getInstance();
 		hb.open();
-		TypedQuery<Proyecto> query = hb.getManager().createNamedQuery("Departamento.findAll", Proyecto.class);
-		List<Proyecto> listPro = query.getResultList();
+		TypedQuery<Departamento> query = hb.getManager().createNamedQuery("Departamento.findAll", Departamento.class);
+		List<Departamento> listdep = query.getResultList();
 		hb.close();
-		return listPro;
+		return listdep;
 	}
 
 	@Override
-	public Optional<Proyecto> findById(Integer id) {
+	public Optional<Departamento> findById(Integer id) {
 		logger.info("findById()");
 		HibernateManager hb = HibernateManager.getInstance();
 		hb.open();
-		Optional<Proyecto> dep = Optional.ofNullable(hb.getManager().find(Proyecto.class, id));// TODO
+		Optional<Departamento> dep = Optional.ofNullable(hb.getManager().find(Departamento.class, id));// TODO
 		hb.close();
 		return dep;
 	}
 
 	@Override
-	public Proyecto save(Proyecto entity) {
+	public Departamento save(Departamento entity) {
 		logger.info("save()");
 		HibernateManager hb = HibernateManager.getInstance();
 		hb.open();
@@ -57,19 +57,19 @@ public class Proyectorepositoryimpl implements Proyectorepository {
 	}
 
 	@Override
-	public Boolean delete(Proyecto entity) {
+	public Boolean delete(Departamento entity) {
 		logger.info("delete()");
 		HibernateManager hb=HibernateManager.getInstance();
 		hb.open();
 		try {
 			hb.getTransaction().begin();
-			entity=hb.getManager().find(Proyecto.class, entity.getId());
+			entity=hb.getManager().find(Departamento.class, entity.getId());
 			hb.getManager().remove(entity);
 			hb.getTransaction().commit();
 			hb.close();
 			return true;
 		} catch (Exception e) {
-			System.out.println("Erorr al eliminar el departamento");
+			System.out.println("Error al eliminar el departamento");
 		}finally {
 			if (hb.getTransaction().isActive()) {
 				hb.getTransaction().rollback();

@@ -4,18 +4,18 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import models.Empleado;
-import repositories.empleado.Empleadorepository;
+import repositories.empleado.EmpleadoRepository;
 
 public class EmpleadoController {
 	Logger logger = Logger.getLogger(EmpleadoController.class.getName());
-	private final Empleadorepository empleadorepository;
+	private final EmpleadoRepository empleadorepository;
 
-	public EmpleadoController(Empleadorepository empleadorepository) {
+	public EmpleadoController(EmpleadoRepository empleadorepository) {
 		this.empleadorepository = empleadorepository;
 	}
 
 	// Empleado
-	public Empleadorepository getEmpleadorepository() {
+	public EmpleadoRepository getEmpleadorepository() {
 		return empleadorepository;
 	}
 
