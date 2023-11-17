@@ -38,11 +38,13 @@ public class ProyectoView {
 		var proyectos = proyectoController.getProyectorepository();
 		proyectos.forEach(System.out::println);
 	}
+
 	public void eliminar(Proyecto pro) {
 		proyectoController.deleteProyecto(pro);
 	}
+
 	public Optional<Proyecto> findById(Integer id) {
-		Optional<Proyecto> pro=proyectoController.getProyectoById(id);
+		Optional<Proyecto> pro = proyectoController.getProyectoById(id);
 		return pro;
 	}
 }
